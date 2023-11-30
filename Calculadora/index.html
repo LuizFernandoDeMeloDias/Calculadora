@@ -10,13 +10,12 @@
     <h1>Calculadora</h1>
     <p>Projeto de uma calculadora feita do zero por mim</p>
 
-    <div id="Corpo_calculadora" style="background-color: black;">
-        <table>
+    <div id="Corpo_calculadora" style="background-color: rgb(62, 62, 62);">
+        <table id="calc-table">
             <tr>
                 <th id="tela" colspan="5" aria-label="Tela da Calculadora" role="textbox" aria-live="assertive">
                     <table id="numeros">
                         <tr>
-                            <th id="10">0</th>
                             <th id="9">0</th>
                             <th id="8">0</th>
                             <th id="7">0</th>
@@ -26,45 +25,47 @@
                             <th id="3">0</th>
                             <th id="2">0</th>
                             <th id="1">0</th>
+                            <th id="0">0</th>
                         </tr>
                     </table>
                 </th>
             </tr>
-            <tr id="buttons">
-                <th> --> </th>
-                <th>MCR</th>
-                <th>M-</th>
-                <th>M+</th>
-                <th>On/C.c</th>
+            <tr class="buttons">
+                <th class="th-func">clear</th>
+                <th class="th-func">MCR</th>
+                <th class="th-func">M-</th>
+                <th class="th-func">M+</th>
+                <th class="th-func">On/C.c</th>
             </tr>
-            <tr>
-                <th>7</th>
-                <th>8</th>
-                <th>9</th>
-                <th>%</th>
-                <th>GT</th>
+            <tr class="buttons">
+                <th class="th-clicaveis">7</th>
+                <th class="th-clicaveis">8</th>
+                <th class="th-clicaveis">9</th>
+                <th class="th-func">%</th>
+                <th class="th-func">GT</th>
             </tr>
-            <tr>
-                <th>4</th>
-                <th>5</th>
-                <th>6</th>
-                <th>X</th>
-                <th>/</th>
+            <tr class="buttons">
+                <th class="th-clicaveis">4</th>
+                <th class="th-clicaveis">5</th>
+                <th class="th-clicaveis">6</th>
+                <th class="th-func">X</th>
+                <th class="th-func">/</th>
             </tr>
-            <tr>
-                <th>1</th>
-                <th>2</th>
-                <th>3</th>
-                <th rowspan="2">+</th>
-                <th>-</th>
+            <tr class="buttons">
+                <th class="th-clicaveis">1</th>
+                <th class="th-clicaveis">2</th>
+                <th class="th-clicaveis">3</th>
+                <th class="th-func" rowspan="2">+</th>
+                <th class="th-func">-</th>
             </tr>
-            <tr>
-                <th>0</th>
-                <th>00</th>
-                <th>.</th>
-                <th>=</th>
+            <tr class="buttons">
+                <th class="th-clicaveis">0</th>
+                <th class="th-clicaveis">00</th>
+                <th class="th-func">.</th>
+                <th class="th-func">=</th>
             </tr>
         </table>
     </div>
 </body>
 </html>
+<script src="calculadora.js"></script>
