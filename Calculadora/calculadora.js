@@ -25,10 +25,10 @@ function adicionarNumero(obj_atual) {
     numeros.push(obj_atual);
     var tam_array = numeros.length;
     if (tam_array <= 10){
-        // Certifique-se de que os elementos HTML com IDs correspondentes existam
         var elemento = document.getElementById(tam_array - 1);
         if (elemento) {
             elemento.innerHTML = obj_atual;
+            console.log(numeros);
         }
     }
 }
@@ -37,8 +37,14 @@ function adicionarNumero(obj_atual) {
 
 function obterfunction(funcao) {
     var func = funcao.textContent;
-    console.log(func);
     if (func === 'clear') {
-       console.log("sla");
+        var tam_array = numeros.length;
+        if (tam_array <= 10){
+            var elemento = document.getElementById(tam_array - 1);
+            if (elemento) {
+                elemento.innerHTML = '0';
+            }
+        }
     }
+        numeros.pop();
 }
