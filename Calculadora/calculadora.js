@@ -2,6 +2,7 @@ var elementosTh = document.querySelectorAll('.th-clicaveis');
 var funcTh = document.querySelectorAll('.th-func');
 var obj_atual;
 var numeros = [];
+var cont_tela = '';
 
 elementosTh.forEach(function (elemento) {
     elemento.addEventListener('click', function () {
@@ -17,34 +18,31 @@ funcTh.forEach(function (funcao){
 
 function obterConteudo(elemento) {
     var conteudo = elemento.textContent;
-    obj_atual = conteudo;
-    adicionarNumero(obj_atual);
+    console.log(conteudo);
+    atualizarNumerosTela(conteudo);
 }
 
-function adicionarNumero(obj_atual) {
-    numeros.push(obj_atual);
-    var tam_array = numeros.length;
-    if (tam_array <= 10){
-        var elemento = document.getElementById(tam_array - 1);
-        if (elemento) {
-            elemento.innerHTML = obj_atual;
+function atualizarNumerosTela(conteudo, proxnum = false){
+    if(cont_tela == ''){
+        document.getElementById('num').innerHTML = conteudo;
+        cont_tela = conteudo;
+    }else{
+        if (proxnum == false){
+            cont_tela += conteudo;
+            document.getElementById('num').innerHTML =  cont_tela;
+        }else{
+            numeros.push(parseInt(cont_tela))
             console.log(numeros);
+            cont_tela = '';
+            
         }
     }
+    
 }
-
-
 
 function obterfunction(funcao) {
-    var func = funcao.textContent;
-    if (func === 'clear') {
-        var tam_array = numeros.length;
-        if (tam_array <= 10){
-            var elemento = document.getElementById(tam_array - 1);
-            if (elemento) {
-                elemento.innerHTML = '0';
-            }
-        }
-    }
-        numeros.pop();
+    var conteudo = funcao.textContent;
+    console.log(conteudo);
+
+
 }
