@@ -8,7 +8,7 @@ var cont_tela = '';
 var result = 0;
 var numeros = [];
 var oper = [];
-
+var conta = '';
 // Adiciona eventos de clique para os elementos com a classe 'th-clicaveis'
 elementosTh.forEach(function (elemento) {
     elemento.addEventListener('click', function () {
@@ -32,12 +32,14 @@ function obterConteudo(elemento) {
 // Função para atualizar os números na tela
 function atualizarNumerosTela(conteudo, proxnum = false){
     if(cont_tela == ''){
-        document.getElementById('num').innerHTML = conteudo;
         cont_tela = conteudo;
+        conta += cont_tela;
+        document.getElementById('num').innerHTML = conta;
     } else {
         if (proxnum == false){
             cont_tela += conteudo;
-            document.getElementById('num').innerHTML =  cont_tela;
+            conta = cont_tela;
+            document.getElementById('num').innerHTML =  conta;
         } else {
             numeros.push(parseInt(cont_tela))
             cont_tela = '';
@@ -47,29 +49,51 @@ function atualizarNumerosTela(conteudo, proxnum = false){
 
 // Função para obter a função do botão clicado
 function obterfunction(funcao) {
+    var tela = document.getElementById('num')
     var conteudo = funcao.textContent;
     
     // Lidar com o botão de exclusão
     if (conteudo === '<' && cont_tela != ''){
         cont_tela = cont_tela.substring(0, cont_tela.length -1);
-        document.getElementById('num').innerHTML = cont_tela;
+        tela.innerHTML = cont_tela;
     }
-
     // Lidar com o botão de adição
     if (conteudo === '+'){
-        cont_tela = document.getElementById('num').textContent;
+        conta += '+';
+        tela.innerHTML = conta;
         numeros.push(parseInt(cont_tela));
         cont_tela = '';
         oper.push('+');
-        console.log(numeros, oper);
-    }
 
+    }
+    if (conteudo === '-'){
+        conta += '-';
+        tela.innerHTML = conta;
+        numeros.push(parseInt(cont_tela));
+        cont_tela = '';
+        oper.push('-');
+
+    }
+    if (conteudo === 'X'){
+        conta += 'X';
+        tela.innerHTML = conta;
+        numeros.push(parseInt(cont_tela));
+        cont_tela = '';
+        oper.push('*');
+    }
+    if (conteudo === '/'){
+        conta += '/';
+        tela.innerHTML = conta;
+        numeros.push(parseInt(cont_tela));
+        cont_tela = '';
+        oper.push('*');
+    }
     // Lidar com o botão de igual
     if (conteudo === '='){
         numeros.push(parseInt(cont_tela));
         cont_tela = '';
         mostrarConta()
-        document.getElementById('num').innerHTML = result;
+        tela.innerHTML = conta + '=' + result;
     }
 }
 
@@ -87,4 +111,3 @@ function mostrarConta(){
     }
     result = eval(conta);
 }
-
