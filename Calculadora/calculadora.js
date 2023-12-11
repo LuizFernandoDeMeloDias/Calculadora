@@ -38,11 +38,8 @@ function atualizarNumerosTela(conteudo, proxnum = false){
     } else {
         if (proxnum == false){
             cont_tela += conteudo;
-            conta = cont_tela;
-            document.getElementById('num').innerHTML =  conta;
-        } else {
-            numeros.push(parseInt(cont_tela))
-            cont_tela = '';
+            conta += conteudo;
+            document.getElementById('num').textContent += conteudo;
         }
     }
 }
@@ -58,43 +55,63 @@ function obterfunction(funcao) {
         tela.innerHTML = cont_tela;
     }
     // Lidar com o botão de adição
-    if (conteudo === '+'){
-        conta += '+';
-        tela.innerHTML = conta;
-        numeros.push(parseInt(cont_tela));
-        cont_tela = '';
-        oper.push('+');
+    switch (conteudo){
+       case '+':
+        if (result  == 0){
+            conta += '+';
+            tela.innerHTML = conta;
+            numeros.push(parseInt(cont_tela));
+            cont_tela = '';
+            oper.push('+');    
+        }else{
+            conta = '';
+            numeros = [];
+            oper = []
+            cont_tela = result;
+            numeros.push(result);
+            cont_tela = '';
+            conta += result;
+            result = 0;
+            conta += '+';
+            tela.innerHTML = conta;
+            oper.push('+');
+        }
+        break
 
-    }
-    if (conteudo === '-'){
-        conta += '-';
-        tela.innerHTML = conta;
-        numeros.push(parseInt(cont_tela));
-        cont_tela = '';
-        oper.push('-');
+        case '-':
+            conta += '-';
+            tela.innerHTML = conta;
+            numeros.push(parseInt(cont_tela));
+            cont_tela = '';
+            oper.push('-');
 
+            break
+        case 'X':
+            conta += 'X';
+            tela.innerHTML = conta;
+            numeros.push(parseInt(cont_tela));
+            cont_tela = '';
+            oper.push('*');
+            
+            break
+        case '/':
+            conta += '/';
+            tela.innerHTML = conta;
+            numeros.push(parseInt(cont_tela));
+            cont_tela = '';
+            oper.push('*');
+
+            break
+        case '=':
+            if (conteudo === '='){
+                numeros.push(parseInt(cont_tela));
+                cont_tela = '';
+                mostrarConta()
+                tela.innerHTML = conta + '=' + result;
+            }
+            break
     }
-    if (conteudo === 'X'){
-        conta += 'X';
-        tela.innerHTML = conta;
-        numeros.push(parseInt(cont_tela));
-        cont_tela = '';
-        oper.push('*');
-    }
-    if (conteudo === '/'){
-        conta += '/';
-        tela.innerHTML = conta;
-        numeros.push(parseInt(cont_tela));
-        cont_tela = '';
-        oper.push('*');
-    }
-    // Lidar com o botão de igual
-    if (conteudo === '='){
-        numeros.push(parseInt(cont_tela));
-        cont_tela = '';
-        mostrarConta()
-        tela.innerHTML = conta + '=' + result;
-    }
+
 }
 
 // Função para calcular e exibir o resultado
