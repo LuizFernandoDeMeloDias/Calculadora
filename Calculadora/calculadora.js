@@ -3,12 +3,19 @@ var elementosTh = document.querySelectorAll('.th-clicaveis');
 var funcTh = document.querySelectorAll('.th-func');
 
 // Variáveis globais
-var obj_atual = null;
-var cont_tela = '';
-var result = 0;
-var numeros = [];
-var oper = [];
-var conta = '';
+var obj_atual = null; //qual elemento está sendo clicado
+var cont_tela = ''; // qual conteúdo está sendo manipulado no momento
+var conta = ''; // conta total usando numeros e operações
+
+var aux = true;
+
+var result = 0; //resultado atual da conta
+
+var numeros = []; // números que serão calculados 
+var oper = []; // uperações usadas 
+
+
+
 // Adiciona eventos de clique para os elementos com a classe 'th-clicaveis'
 elementosTh.forEach(function (elemento) {
     elemento.addEventListener('click', function () {
@@ -28,18 +35,20 @@ function obterConteudo(elemento) {
     var conteudo = elemento.textContent;
     atualizarNumerosTela(conteudo);
 }
-
+ 
 // Função para atualizar os números na tela
 function atualizarNumerosTela(conteudo, proxnum = false){
     if(cont_tela == ''){
         cont_tela = conteudo;
         conta += cont_tela;
         document.getElementById('num').innerHTML = conta;
+        aux = true;
     } else {
         if (proxnum == false){
             cont_tela += conteudo;
             conta += conteudo;
             document.getElementById('num').textContent += conteudo;
+            aux = true;
         }
     }
 }
@@ -55,30 +64,33 @@ function obterfunction(funcao) {
         tela.innerHTML = cont_tela;
     }
     // Lidar com o botão de adição
+    if(aux == true){
     switch (conteudo){
-       case '+':
-        if (result  == 0){
-            conta += '+';
-            tela.innerHTML = conta;
-            numeros.push(parseInt(cont_tela));
-            cont_tela = '';
-            oper.push('+');    
-        }else{
-            conta = '';
-            numeros = [];
-            oper = []
-            cont_tela = result;
-            numeros.push(result);
-            cont_tela = '';
-            conta += result;
-            result = 0;
-            conta += '+';
-            tela.innerHTML = conta;
-            oper.push('+');
-        }
+        case '+':
+            aux = false;
+                if (result  == 0){
+                    conta += '+';
+                    tela.innerHTML = conta;
+                    numeros.push(parseInt(cont_tela));
+                    cont_tela = '';
+                    oper.push('+');    
+                }else{
+                    conta = '';
+                    numeros = [];
+                    oper = [];
+                    cont_tela = result;
+                    numeros.push(result);
+                    cont_tela = '';
+                    conta += result;
+                    result = 0;
+                    conta += '+';
+                    tela.innerHTML = conta;
+                    oper.push('+');
+                }
         break
 
         case '-':
+            aux = false;
             conta += '-';
             tela.innerHTML = conta;
             numeros.push(parseInt(cont_tela));
@@ -87,6 +99,7 @@ function obterfunction(funcao) {
 
             break
         case 'X':
+            aux = false;
             conta += 'X';
             tela.innerHTML = conta;
             numeros.push(parseInt(cont_tela));
@@ -95,6 +108,7 @@ function obterfunction(funcao) {
             
             break
         case '/':
+            aux = false;
             conta += '/';
             tela.innerHTML = conta;
             numeros.push(parseInt(cont_tela));
@@ -110,8 +124,8 @@ function obterfunction(funcao) {
                 tela.innerHTML = conta + '=' + result;
             }
             break
+        }
     }
-
 }
 
 // Função para calcular e exibir o resultado
